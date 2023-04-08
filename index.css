@@ -2,6 +2,10 @@ body {
   text-align: center;
   align: center;
 }
+.imgcenter{
+  display: grid;
+  place-items: center;
+}
 .title{
   font-family: 'Source Code Pro', monospace;
   color: rgb( 65, 76, 75);
