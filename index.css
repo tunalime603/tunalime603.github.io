@@ -1,5 +1,17 @@
 .title{
   font-family: 'Source Code Pro', monospace;
   text-align: center;
-  color: rgb( 65, 76, 75);
+  color: rgb(83, 95, 94);
+}
+.games{
+  font-family: 'Source Code Pro', monospace;
+  text-align: center;
+}
+.sg1{
+  transition: .5;
+  color: rgb(56, 50, 50);
+}
+.sg1 :hover{
+  transition: .5;
+  color: rgb(80, 65, 65)
 }
