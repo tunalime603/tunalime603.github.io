@@ -1,4 +1,5 @@
 .title{
   font-family: 'Source Code Pro', monospace;
-  align-items: center;
+  text-align: center;
+  color: cyan;
 }
