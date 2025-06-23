@@ -10,11 +10,13 @@
 }
 
 .image {
+  transition: 2s;
   width: 50%;
   align: left;
 }
 
 .image:hover {
+  transition: 2s;
   width: 80%;
   align: center;
 }
