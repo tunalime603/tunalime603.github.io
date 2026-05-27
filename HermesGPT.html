@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #141303;
+        color: #DCF2F7;
+        margin: 20px;
+      }
+      .absCenter {
+        left: 0;
+        position: absolute;
+        text-align: center;
+        top: 40%;
+        width: 100%;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .prescript {
+        font-weight: bold;
+        font-size: 18px;
+        color: #5CC6F2;
+      }
+      input, button {
+        padding: 10px;
+        font-size: 14px;
+      }
+    </style>
+    <title>Will Of The City</title>
+  </head>
+  <body>
+    <div class="absCenter">
+      <p class="title">Lobotomized Prescript Device</p>
+      <button onclick="getPrescript()">Recieve</button>
+      <p id="prescript" class="prescript"></p>
+      <input id="rating" placeholder="rate prescript 1 to 5">
+      <button onclick="ratePrescript()">rate</button>
+    </div>
+    <script>
+      const memory = {
+        "fire": ["and", "bucket"],
+        "draw": ["a", "an", "the", "everything", "painfully", "art", "happily", "sadly", "angrily", "tiny", "giant"],
+        "or": ["describe", "draw", "describe", "like"],
+        "describe": ["everything", "like", "dramatic", "movie", "trailer", "narrator"],
+        "everything": ["at", "using"],
+        "at": ["a", "an", "every"],
+        "a": ["painfully", "dramatic", "tiny", "giant", "moral", "master", "feeling", "movement", "description", ""],
+        "an": ["evil", "illustration", "important", "end", ""],
+        "painfully": ["slow", "dramatic", "tiny", "giant"],
+        "slow": ["and"],
+        "make": ["a", "an", "every", "the"],
+        "every": ["word", "movement"],
+        "word": ["feel", "belongs"],
+        "movement": ["feel"],
+        "feel": ["feeling", "important"],
+        "feeling": ["human", "sadly", "happily", "angrily"],
+        "and": ["important", "shit", "moral", "neutral"],
+        "important": ["shit"],
+        "shit": ["a", "an", "yourself", "drawing"],
+        "yourself": ["drawing", "description"],
+        "drawing": ["description", "illustration"],
+        "description": ["illustration"],
+        "illustration": ["art", "interpret"],
+        "art": ["interpret"],
+        "interpret": ["weather", "object"],
+        "weather": ["the"],
+        "the": ["end", "future", "past", "present", "world"],
+        "end": ["embrace"],
+        "embrace": ["is"],
+        "is": ["happily", "sadly", "angrily"],
+        "happily": ["human"],
+        "sadly": ["human"],
+        "bucket": ["welfare"],
+        "welfare": ["control"],
+        "control": ["disciplinary"],
+        "disciplinary": ["training"],
+        "training": ["information"],
+        "information": ["architecture"],
+        "angrily": ["human"],
+        "human": ["bad", "good", "evil"],
+        "bad": ["good"],
+        "good": ["evil", "moral"],
+        "evil": ["moral"],
+        "moral": ["neutral"],
+        "neutral": ["illustrate"],
+        "illustrate": ["a", "an", "the"],
+        "pictionary": ["pancakes"],
+        "pancakes": ["discord"],
+        "discord": ["dm"],
+        "dm": ["a", "an", "via", "the"],
+        "contact": ["a", "an", "via", "the", "master"],
+        "via": ["discord"],
+        "master": ["of"],
+        "of": ["a", "an", "fire", "information"],
+        "one": ["who", "is"],
+        "who": ["loves", "is", "painfully", "happily", "sadly", "angrily"],
+        'loves': ["a", "an", "faust", "raven"],
+        "faust": ["raven"],
+        "raven": ["object"],
+        "object": ["with", "eyes"],
+        "with": ["a", "an", "eyes", "arms", "legs"],
+        "eyes": ["arms"],
+        "arms": ["legs"],
+        "legs": ["cartoon"],
+        "cartoon": ["character"],
+        "character": ["act"],
+        "act": ["a", "an", "most"],
+        "most": ["expensive"],
+        "expensive": ["thing"],
+        "thing": ["world"],
+        "world": ["while"],
+        'while': ["a", "an", "sketching"],
+        "sketching": ["a", "an", "item"],
+        "item": ["from"],
+        "from": ["bird"],
+        "bird": ["eye"],
+        "eye": ["view"],
+        "view": ["only"],
+        "only": ["a", "an", "describe", "geometric"],
+        "like": ["a", "an", "dramatic"],
+        "dramatic": ["movie"],
+        "movie": ["trailer"],
+        "trailer": ["narrator"],
+        "narrator": ["using"],
+        "using": ["a", "an", "only"],
+        "geometric": ["shapes"],
+        "shapes": ["pretend"],
+        "pretend": ["a", "an", "tiny"],
+        "tiny": ["you`re"],
+        "you`re": ["a", "an", "explaining"],
+        "explaining": ["a", "an", "to"],
+        "to": ["a", "an", "giant"],
+        "giant": [],
+        "your": ["word"],
+        'belongs': ["in"],
+        "in": ["a", "an", "future", "past", "present"],
+        "future": ["explain"],
+        "past": ["explain"],
+        "present": ["a", "an", "explain"],
+        "explain": ["a", "an", "you`ve"],
+        "you`ve": ["never"],
+        "never": ["seen"],
+        "seen": ["a", "an", "before"],
+        "before": ["a", "an", "don`t"],
+        "don`t": ["know"],
+        "know": ["a", "an", "what"],
+        "what": ["a", "an", "it`s"],
+        "it`s": ["a", "an", "called"],
+        "called": ["a", "an", ]
+      };
+      const wordList = [
+        "draw",
+        "or",
+        "describe",
+        "everything",
+        "at",
+        "a",
+        "painfully",
+        "slow",
+        "make",
+        "every",
+        "word",
+        "or",
+        "movement",
+        "feel",
+        "feeling",
+        "and",
+        "important",
+        "shit",
+        "yourself",
+        "drawing",
+        "description",
+        "illustration",
+        "art",
+        "interpret",
+        "weather",
+        "the",
+        "end",
+        "embrace",
+        "is",
+        "happily",
+        "sadly",
+        "angrily",
+        "human",
+        "bad",
+        "good",
+        "evil",
+        "moral",
+        "neutral",
+        "an",
+        "illustrate",
+        "pictionary",
+        "pancakes",
+        "discord",
+        "dm",
+        "contact",
+        "via",
+        "master",
+        "of",
+        "fire",
+        "bucket",
+        "welfare",
+        "control",
+        "disciplinary",
+        "training",
+        "information",
+        "architecture",
+        "one",
+        "who",
+        "loves",
+        "faust",
+        "raven",
+        "object", 
+        "with", 
+        "eyes", 
+        "arms",
+        "legs", 
+        "cartoon", 
+        "character",
+        "act", 
+        "most", 
+        "expensive", 
+        "thing", 
+        "world", 
+        "while", 
+        "sketching",
+        "item", 
+        "from", 
+        "bird", 
+        "eye", 
+        "view", 
+        "only",
+        "describe", 
+        "like", 
+        "dramatic", 
+        "movie", 
+        "trailer", 
+        "narrator",
+        "using", 
+        "only", 
+        "geometric", 
+        "shapes",
+        "pretend", 
+        "tiny", 
+        "you`re", 
+        "explaining", 
+        "to", 
+        "giant",
+        "your", 
+        "word", 
+        "it", 
+        "belongs", 
+        "in", 
+        "future",
+        "past",
+        "present",
+        "explain", 
+        "you`ve", 
+        "never", 
+        "seen", 
+        "before", 
+        "don`t", 
+        "know", 
+        "what", 
+        "it`s", 
+        "called."
+      ];
+      function generateSentence(length = 5) {
+          let sentence = [];
+          for (let i = 0; i < length; i++) {
+              const randomIndex = Math.floor(Math.random() * wordList.length);
+              sentence.push(wordList[randomIndex]);
+          }
+          return sentence.join(" ");
+      }
+      function generateSmartSentence(length = 5) {
+          let sentence = [];
+          let lastWord = null;
+
+          for (let i = 0; i < length; i++) {
+              let choices = [...wordList];
+
+              if (lastWord && memory[lastWord]) {
+                  choices = choices.concat(memory[lastWord]);
+              }
+
+              const randomIndex = Math.floor(Math.random() * choices.length);
+              const word = choices[randomIndex];
+              
+              sentence.push(word);
+
+              if (lastWord) {
+                  if (!memory[lastWord]) memory[lastWord] = [];
+                  memory[lastWord].push(word);
+              }
+
+              lastWord = word;
+          }
+
+          return sentence.join(" ");
+      }
+      function giveFeedback(sentence, score) {
+          const words = sentence.split(" ");
+          for (let i = 0; i < words.length - 1; i++) {
+              const pairKey = words[i];
+              if (!memory[pairKey]) memory[pairKey] = [];
+              // Add the next word multiple times if score is high
+              for (let j = 0; j < score; j++) {
+                  memory[pairKey].push(words[i + 1]);
+              }
+          }
+      }
+      function getPrescript() {
+        const prescript = generateSmartSentence(10);
+        const container = document.getElementById("prescript");
+        container.innerHTML = "_" + prescript + "._";
+      }
+      function ratePrescript() {
+        const prescript = document.getElementById("prescript").innerHTML;
+        const rating = document.getElementById("rating").innerHTML;
+        giveFeedback(prescript, rating);
+        console.log(memory)
+      }
+    </script>
+  </body>
+</html>
