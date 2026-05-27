@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #141303;
+        color: #DCF2F7;
+        margin: 20px;
+      }
+      .absCenter {
+        left: 0;
+        position: absolute;
+        text-align: center;
+        top: 40%;
+        width: 100%;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .prescript {
+        font-weight: bold;
+        font-size: 18px;
+        color: #5CC6F2;
+      }
+      input, button {
+        padding: 10px;
+        font-size: 14px;
+      }
+    </style>
+    <title>Will Of The City</title>
+  </head>
+  <body>
+    <div class="absCenter">
+      <p class="title">Prescript Device</p>
+      <button onclick="getDrawPrescript()">Drawing Prescript</button>
+      <button onclick="getDescPrescript()">Describing Prescript</button>
+      <p id="prescript" class="prescript"></p>
+    </div>
+    <script>
+      const drawPrescripts = [
+        "Upon receiving your description, illustrate it as though it were an unavoidable catastrophe.",
+        "Depict in the form it would take after years of abandonment.",
+        "Illustrate as though it has become hazardous to human cognition.",
+        "You are forbidden from drawing the object directly. Only portray the consequences of its presence.",
+        "Render the description as if it exists within a surveillance record recovered from a ruined facility.",
+        "Draw normally at first. Then progressively distort it until it is barely recognizable.",
+        "Interpret the description as a weather report. Draw the weather.",
+        "Every subject in the illustration must include human feces. Flies are optional.",
+        "Every # stroke(s), alternate line weight and color.",
+        "Put little effort into drawing and do # jumping jack(s) before returning to the screen.",
+        "Surround the subjects with holy objects.",
+        "Contact a random person and tell them your plans. Collaborate on the drawing.",
+        "Write out the description onto the image, imitate the handwriting style of the founding fathers.",
+        "Illustrate the scene as if gravity stopped functioning halfway through the drawing.",
+        "Depict the subject as an ancient ritual nobody remembers correctly anymore.",
+        "Draw the aftermath of the object being discovered in a child`s basement shrine.",
+        "Interpret the description as a disease symptom chart.",
+        "Every living thing in the image must appear mildly disappointed.",
+        "Draw it like an instructional diagram found in a submarine that never resurfaced.",
+        "Illustrate the subject as if it were illegally grown in a laboratory.",
+        "Replace all shadows with teeth.",
+        "The drawing must look confiscated by the government.",
+        "Render the scene as though the camera lens was covered in petroleum jelly and dread.",
+        "Every object should appear slightly melted.",
+        "Draw it as if remembered incorrectly after a fever dream.",
+        "Include evidence that somebody recently escaped the scene in panic.",
+        "Interpret the description as a religious prophecy.",
+        "Illustrate it like a page torn from an explorer’s journal moments before disappearance.",
+        "Every face in the image must be looking directly at the viewer.",
+        "Depict the subject as though it has developed sentience and resentment.",
+        'Render the image as though photocopied 400 times.',
+        "Add signs warning people not to approach, written in increasingly desperate language.",
+        "Draw it as if underwater, but nothing else acknowledges the water.",
+        "Every animal in the image must be hairless.",
+        "Illustrate the consequences of the object existing one second in the future.",
+        "Draw it like a cave painting made by somebody who should not have known modern objects.",
+        "Every straight line must tremble with fear.",
+        "Portray the scene immediately before a power outage.",
+        "Illustrate as though the image itself is cursed and trying to escape the page.",
+        "The drawing must contain at least one inexplicable staircase.",
+        "Render the description as though translated through 12 different languages incorrectly.",
+        "Add one tiny normal-looking object that becomes more disturbing the longer you notice it.",
+        "Draw the subject as if it has been taxidermied poorly.",
+        "Every window must reveal something impossible.",
+        "Illustrate the object as though it is worshipped by insects.",
+        "Draw it from the perspective of someone hiding nearby.",
+        "Every person in the image must appear to be suppressing terrible news.",
+        "Render the scene like evidence presented during a paranormal court trial.",
+        "Include a calendar date circled ominously somewhere in the image.",
+        "Depict the subject as if it only exists when unobserved.",
+        "Every reflection in the image must disagree with reality.",
+        "Draw it as though discovered inside a sealed wall cavity.",
+        "Add signs that the environment itself is trying to reject the subject.",
+        'Illustrate the scene as if it were generated by an exhausted artificial intelligence.',
+        "Every handwritten note in the image must end abruptly mid-sentence.",
+        "Render it as though recorded on damaged VHS tape during a thunderstorm.",
+        "Depict the subject as a failed attempt to recreate something human.",
+        "Every object should cast the wrong shadow.",
+        "Draw it as though archaeologists fundamentally misunderstood its purpose.",
+        "The image must suggest something enormous just outside the frame.",
+        "Illustrate the description as though reality itself is buffering.",
+        "Every clock in the image must show a different impossible time.",
+        "Render the scene as though the artist became increasingly paranoid while drawing it."
+        ];
+      const descPrescripts = [
+        "You must explain the artwork as though you have only read about it in an archeology report.",
+        "Describe the illustration as if a cult has formed around it's existence, and you are worshipping it.",
+        "Describe the artwork with absolute certainty, even if every detail you give is clearly wrong.",
+        "Explain your word in the tone of an employee reciting mandatory safety procedures.",
+        "Interpret the illustration as a weather report. Describe the weather.",
+        "Describe the artwork as if you are a salesman with a gun to your head.",
+        "Stub your toe halfway through writing and transcribe your pain.",
+        "Describe as though it has become hazardous to human cognition.",
+        "Perform the action drawn.",
+        "Contact a random person and tell them your plans. Collaborate on the description.",
+        "You're the last surviving witness testifying before a senate committee. They need a description of the subject.",
+        "Explain the image as if it were a forbidden recipe discovered in a monastery basement.",
+        "Narrate the artwork like a nature documentary about a newly discovered predator.",
+        "Describe the illustration and do not cry or sob.",
+        "Explain the picture as though you are legally liable for every incorrect detail.",
+        "Describe the artwork like a pirate trying to bluff their way through an art history exam.",
+        "Describe the artwork like a pirate describing the seas.",
+        "Explain the image as if the object depicted owes you money.",
+        "Describe the illustration as though it has just insulted your family.",
+        "Interpret the artwork like an exhausted astronaut recording a final log entry.",
+        "Describe the image with the confidence of someone who has never been wrong once in their life.",
+        "Explain the drawing like you're reading prophecy from scorched parchment.",
+        "Describe the artwork as if it was recovered from a shipwreck and still dripping seawater.",
+        "Explain the image while slowly realizing you've misunderstood it completely.",
+        "Describe the picture as if you're narrating a heist movie montage.",
+        "Explain the artwork like an infomercial airing at 3 AM.",
+        "The drawing personally ruined your weekend, describe it in an unpleasant way.",
+        "The image contains classified secrets and must be described in code.",
+        "Flip your keyboard around and describe the image.",
+        "Explain the artwork like a sports commentator witnessing an impossible comeback.",
+        "After the description is finished, cut out parts as if partially erased by the Arayashiki.",
+        "Explain the picture as if your entire religion depends on interpreting it correctly.",
+        "Describe the artwork in the tone of a parent trying to stay calm in IKEA.",
+        "Explain the image like a suspicious villager warning travelers not to approach it.",
+        "Describe the drawing as though it appeared suddenly in your house overnight.",
+        "Explain the illustration while trying to convince someone it's completely normal.",
+        "Describe the artwork as though it is slowly approaching your current location.",
+        "Explain the image like a cooking show.",
+        "Explain the image like a cooking show that has gone catastrophically off-script.",
+        "Describe the drawing as if every sentence must end before security catches you.",
+        "Explain the artwork as though it was found etched into the moon.",
+        "Describe the illustration like a bedtime story told by someone who should not be trusted around children.",
+        "Explain the image as if you are translating ancient graffiti from a collapsing civilization.",
+        "Flirt with the image unsuccessfully.",
+        "Flirt with the image.",
+        "Explain the drawing like a conspiracy theorist connecting red thread on a corkboard.",
+        "Describe the illustration as if it's evidence in a paranormal investigation show.",
+        "Explain the image in the style of an elevator pitch.",
+        "Explain the image in the style of an elevator pitch. It must be noted the hypothetical business executive has just broken up with you.",
+        "Describe the artwork like a chef describing the daily special.",
+        "Explain the drawing as though it has challenged you to single combat.",
+        "Describe the image as if your pay depends entirely on enthusiasm.",
+        "Explain the artwork like a medieval bard who forgot most of the details halfway through.",
+        "This image is the climax of a manga fight scene. Write the internal thoughts of the characters.",
+        "The image was created by dolphins attempting human communication. Respond to them.",
+        "The image was created by brainrotted toddlers attempting human communication. Respond to them.",
+        "Explain the picture while trying to hide the fact you've never seen one before.",
+        "Describe the drawing as it has become the center of international diplomacy.",
+        "Explain the artwork like a tour guide who absolutely hates tourists.",
+        "Describe the image as though you are describing humanity's greatest achievement.",
+        "Describe the image like a commentary drama youtuber stretching runtime to 8 minutes.",
+        "Describe the artwork like a villain monologue moments before defeat.",
+        "Explain the image as if your ancestor fought in a war over it.",
+        "Construct your description using only inspirational phrases and metaphors",
+        "This image is terrible news to your teenage child. Please break the news to them kindly.",
+        "Wizard Magicus, please repair this fridge. The instructions can be found within the provided illustration.",
+        "Wizard Magicus, please cast this spell. The incantation can be found within the provided illustration.",
+        "Describe the artwork like you found it growing in the forest.",
+        "Explain the image while pretending you absolutely planned this presentation.",
+        "Describe the drawing as though it emits a low electrical hum only you can hear.",
+        "Explain the illustration like a black-market dealer showing contraband under a trench coat.",
+        "Give the image a name and heavily personnify it in description.",
+        "Explain the minor economic collapse that can be caused by the image's contents.",
+        "Describe the drawing in the style of an emergency broadcast interruption.",
+        "Use 2010 dank meme language to describe the illustration.",
+        "Create a poem describing the artwork.",
+        "Disperse brainrot terms into your description.",
+        "Create a haiku describing the artwork.",
+        "It is Stranger Things season 5, and the team has just made a breakthrough with the plan.",
+        "Describe the image using Archived terms."
+        ];
+      function getDescPrescript(type) {
+        const container = document.getElementById("prescript");
+        const randomIndex = Math.floor(Math.random() * descPrescripts.length);
+
+        container.innerHTML = "_" + descPrescripts[randomIndex] + "_";
+      }
+      function getDrawPrescript(type) {
+        const container = document.getElementById("prescript");
+        const randomIndex = Math.floor(Math.random() * drawPrescripts.length);
+
+        container.innerHTML = "_" + drawPrescripts[randomIndex] + "_";
+      }
+    </script>
+  </body>
+</html>
